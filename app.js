@@ -2,7 +2,7 @@ window.onload = function() {
 
     var milestones;
 
-    cartodb.createVis('map', 'http://saleiva.cartodb.com/api/v2/viz/8215d42e-ed7e-11e3-aa57-0edbca4b5057/viz.json')
+    cartodb.createVis('map', 'http://saleiva.cartodb.com/api/v2/viz/8215d42e-ed7e-11e3-aa57-0edbca4b5057/viz.json',{ zoomControl: false })
     .done(function(vis, layers) {
 
         var map = vis.getNativeMap();
@@ -27,7 +27,7 @@ window.onload = function() {
             return O.Action(function() {
                 $('#milestone > p').text(txt)
                 $('#milestone > span').text(date)
-                $('#footer > #buttons > span').text(story.state()+1 + '/' + milestones.length)
+                $('#footer > #buttons > span').text(story.state() + '/' + milestones.length)
                 console.log(marker)
               }); 
         }
@@ -42,7 +42,7 @@ window.onload = function() {
                     var stop = data.rows[i];
                     var pos = [stop.lat, stop.lon];
                     var txt = stop.txt;
-                    var date = stop.date +', '+stop.location +', '+stop.state;
+                    var date = (stop.date).split('/')[2] +', '+stop.location +', '+stop.state;
                     var zoom = stop.zoom;
                     var marker = L.icon({
                         iconUrl: 'img/markers/' + stop.marker + '.png',
