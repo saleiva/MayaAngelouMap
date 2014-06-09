@@ -7,9 +7,17 @@ window.onload = function() {
 
         var map = vis.getNativeMap();
 
+
         var seq = O.Sequential();
         O.Keys().left().then(seq.prev, seq);
         O.Keys().right().then(seq.next, seq);
+
+        if ("ontouchstart" in document.documentElement) {
+          map.dragging.disable();
+          O.Gestures().swipeLeft().then(seq.prev, seq)
+          O.Gestures().swipeRight().then(seq.next, seq)
+        }
+
         $('a.next').click(function() { seq.next(); })
         $('a.prev').click(function() { seq.prev(); })
 
